@@ -1,0 +1,14 @@
+config:
+  oauth2:
+    client:
+      # Entspricht einem Client vom Typ "API Zugriff" im Entwicklerportal
+      # https://oauth.net/2/grant-types/
+      grant-type: client_credentials
+      # Die Werte sind der Detailansicht eines Clients im Entwicklerportal zu entnehmen.
+      clientId: ...
+      clientSecret: ...
+      # Der Client muss diese Scopes unterstützen. Siehe Tab "Berechtigungen" in der
+      # Detailansicht eines Clients im Entwicklerportal
+      scope: financial estate
+      # https://auth.financial-lighthouse.de/.well-known/openid-configuration
+      accessTokenUri: https://auth.financial-lighthouse.de/connect/token
