@@ -34,7 +34,7 @@ import de.financial_lighthouse.demo.query.Query;
  */
 public class LighthouseClient {
 
-    private final String baseUrl = "https://api.financial-lighthouse.de/%s";
+    private final String baseUrl = "https://api.financial-lighthouse.de/fin/%s";
     private final Logger logger = LoggerFactory.getLogger(LighthouseClient.class);
     private final ClientCredentialsResourceDetails resourceDetails;
 
@@ -121,10 +121,10 @@ public class LighthouseClient {
 
         var response = restTemplate().exchange(url, method, new HttpEntity<>(obj), type);
         logRequest(url, method, response);
-        
+
         if (response.getStatusCode().is2xxSuccessful())
             return response.getBody().getID();
-        
+
         throw new Exception(response.getStatusCode().getReasonPhrase());
     }
 
@@ -156,7 +156,7 @@ public class LighthouseClient {
      * @return Das gefundene Element oder <code>null</code>, falls nicht gefunden.
      */
     public @Nullable Client getClient(int id) {
-        return get(new ParameterizedTypeReference<Client>() {}, "/fin/Clients/%d", id);
+        return get(new ParameterizedTypeReference<Client>() {}, "/Clients/%d", id);
     }
 
     /**
@@ -165,7 +165,7 @@ public class LighthouseClient {
      * @return Die Suchtreffer.
      */
     public QueryResult<Client> queryClients(@Nullable Query q) {
-        return query(q, "/fin/Clients/Query");
+        return query(q, "/Clients/Query");
     }
 
     /**
@@ -174,8 +174,8 @@ public class LighthouseClient {
      * @return Der eindeutige Schlüssel des angelegten Kundens.
      * @throws Exception Fehler beim Aufruf der API.
      */
-    public int createClient(Client c) throws Exception {
-        return createAndReturnId(new ParameterizedTypeReference<Client>() {},  c, "/fin/Clients");
+    public UUID createClient(Client c) throws Exception {
+        return createAndReturnId(new ParameterizedTypeReference<Client>() {},  c, "/Clients");
     }
 
     /**
@@ -184,15 +184,15 @@ public class LighthouseClient {
      * @throws Exception Fehler beim Aufruf der API.
      */
     public void updateClient(Client c) throws Exception {
-        update(new ParameterizedTypeReference<Client>() {}, c, "/fin/Clients/%d", c.getID());
+        update(new ParameterizedTypeReference<Client>() {}, c, "/Clients/%s", c.getID());
     }
 
     /**
      * Löscht einen Kunden.
      * @param id Der eindeutige Schlüssel des zu löschenden Kundens.
      */
-    public void deleteClient(int id) {
-        deleteById("/fin/Clients/%d", id);
+    public void deleteClient(UUID id) {
+        deleteById("/Clients/%s", id);
     }
 
     // #endregion
@@ -205,7 +205,7 @@ public class LighthouseClient {
      * @return Das gefundene Element oder <code>null</code>, falls nicht gefunden.
      */
     public @Nullable Plan getPlan(int id) {
-        return get(new ParameterizedTypeReference<Plan>() {}, "/fin/Plans/%d", id);
+        return get(new ParameterizedTypeReference<Plan>() {}, "/Plans/%d", id);
     }
 
     /**
@@ -214,7 +214,7 @@ public class LighthouseClient {
      * @return Die Suchtreffer.
      */
     public QueryResult<Plan> queryPlans(@Nullable Query q) {
-        return query(q, "/fin/Plans/Query");
+        return query(q, "/Plans/Query");
     }
 
     /**
@@ -224,8 +224,8 @@ public class LighthouseClient {
      * @return Der eindeutige Schlüssel des angelegten Plans.
      * @throws Exception Fehler beim Aufruf der API.
      */
-    public int createPlan(int clientID, Plan p) throws Exception {
-        return createAndReturnId(new ParameterizedTypeReference<Plan>() {}, p, "/fin/Plans/ByClient/%d", clientID);
+    public int createPlan(UUID clientID, Plan p) throws Exception {
+        return createAndReturnId(new ParameterizedTypeReference<Plan>() {}, p, "/Plans/ByClient/%s", clientID);
     }
 
     /**
@@ -234,7 +234,7 @@ public class LighthouseClient {
      * @throws Exception Fehler beim Aufruf der API.
      */
     public void updatePlan(Plan p) throws Exception {
-        update(new ParameterizedTypeReference<Plan>() {}, p, "/fin/Plans/%d", p.getID());
+        update(new ParameterizedTypeReference<Plan>() {}, p, "/Plans/%d", p.getID());
     }
 
     /**
@@ -242,7 +242,7 @@ public class LighthouseClient {
      * @param id Der eindeutige Schlüssel des zu löschenden Finanzplans.
      */
     public void deletePlan(int id) {
-        deleteById("/fin/Plans/%d", id);
+        deleteById("/Plans/%d", id);
     }
 
     // #endregion
@@ -255,7 +255,7 @@ public class LighthouseClient {
      * @return Das gefundene Element oder <code>null</code>, falls nicht gefunden.
      */
     public @Nullable FamilyTree getFamily(int planID) {
-        return get(new ParameterizedTypeReference<FamilyTree>() {}, "/fin/Plans/%d/Family", planID);
+        return get(new ParameterizedTypeReference<FamilyTree>() {}, "/Plans/%d/Family", planID);
     }
 
     /**
@@ -264,7 +264,7 @@ public class LighthouseClient {
      * @throws Exception Fehler beim Aufruf der API.
      */
     public void updateFamily(int planID, FamilyTree f) throws Exception {
-        update(new ParameterizedTypeReference<FamilyTree>() {}, f, "/fin/Plans/%d/Family", planID);
+        update(new ParameterizedTypeReference<FamilyTree>() {}, f, "/Plans/%d/Family", planID);
     }
 
     // #endregion
@@ -278,7 +278,7 @@ public class LighthouseClient {
      * @return Das gefundene Element oder <code>null</code>, falls nicht gefunden.
      */
     public @Nullable PlanData getPlanData(int planID, UUID id) {
-        return get(new ParameterizedTypeReference<PlanData>() {}, "/fin/Plans/%d/Data/%s", planID, id);
+        return get(new ParameterizedTypeReference<PlanData>() {}, "/Plans/%d/Data/%s", planID, id);
     }
 
     /**
@@ -288,7 +288,7 @@ public class LighthouseClient {
      * @return Die Suchtreffer.
      */
     public QueryResult<PlanData> queryPlanData(int planID, @Nullable Query q) {
-        return query(q, "/fin/Plans/%d/Data/Query", planID);
+        return query(q, "/Plans/%d/Data/Query", planID);
     }
 
     /**
@@ -299,7 +299,7 @@ public class LighthouseClient {
      * @throws Exception Fehler beim Aufruf der API.
      */
     public UUID createPlanData(int planID, PlanData p) throws Exception {
-        return createAndReturnId(new ParameterizedTypeReference<PlanData>() {}, p, "/fin/Plans/%d/Data", planID);
+        return createAndReturnId(new ParameterizedTypeReference<PlanData>() {}, p, "/Plans/%d/Data", planID);
     }
 
     /**
@@ -309,7 +309,7 @@ public class LighthouseClient {
      * @throws Exception Fehler beim Aufruf der API.
      */
     public void updatePlanData(int planID, PlanData p) throws Exception {
-        update(new ParameterizedTypeReference<PlanData>() {}, p, "/fin/Plans/%d/Data/%s", planID, p.getID());
+        update(new ParameterizedTypeReference<PlanData>() {}, p, "/Plans/%d/Data/%s", planID, p.getID());
     }
 
     /**
@@ -318,7 +318,7 @@ public class LighthouseClient {
      * @param id Der eindeutige Schlüssel des zu löschenden Finanzvorgang.
      */
     public void deletePlanData(int planID, UUID id) {
-        deleteById("/fin/Plans/%d/Data/%s", planID, id);
+        deleteById("/Plans/%d/Data/%s", planID, id);
     }
 
     // #endregion
@@ -331,7 +331,7 @@ public class LighthouseClient {
      * @return Die generierte Auswertung.
      */
     public @Nullable Report generateLiquidityReport(LiquidityReportType type, int planID, ReportParameters parameters) throws Exception {
-        return createAndReturnContent(new ParameterizedTypeReference<Report>() {}, parameters, "/fin/Liquidity/%s/%d", type, planID);
+        return createAndReturnContent(new ParameterizedTypeReference<Report>() {}, parameters, "/Liquidity/%s/%d", type, planID);
     }
 
 }

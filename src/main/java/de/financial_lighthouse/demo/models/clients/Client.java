@@ -1,6 +1,7 @@
 package de.financial_lighthouse.demo.models.clients;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -11,7 +12,7 @@ import de.financial_lighthouse.demo.models.HasId;
 /**
  * Ein Kunde, der mehrere zugeordnete Pläne haben kann
  */
-public class Client extends HasId<Integer> {
+public class Client extends HasId<UUID> {
 
     @JsonProperty("birthday")
     private LocalDateTime birthday = null;

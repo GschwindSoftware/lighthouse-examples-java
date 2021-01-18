@@ -53,7 +53,7 @@ public class Main implements CommandLineRunner {
                 .setBirthday(LocalDateTime.of(1970, 1, 1, 0, 0, 0))
             );
 
-            logger.info(String.format("Kunde %d angelegt", clientID));
+            logger.info(String.format("Kunde %s angelegt", clientID));
 
             // Eine Finanzplanung für diesen Kunden
             var planID = api.createPlan(clientID, new Plan()

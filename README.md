@@ -14,7 +14,7 @@ Das Beispiel zeigt den Zugriff auf die Financial Lighthouse API mit Java. Im Bes
 Das Beispiel benötigt einen gültigen Zugang zu Financial Lighthouse und die Zugangsdaten eines API-Client. Um einen API-Client zu erzeugen:
 
 1. Rufen sie das [Administrationsportal](https://www.financial-lighthouse.de/admin) auf.
-2. Klicken Sie auf "Entwicklerportal" in der Navigation rechts oben Sollten Sie den Eintrag nicht sehen, weisen Sie sich oder Ihr Administrator Sie einer Gruppe zu, die das Recht "Zugriff auf den Entwicklerbereich." beistzt:
+2. Klicken Sie auf "Entwicklerportal" in der Navigation rechts oben Sollten Sie den Eintrag nicht sehen, weisen Sie sich oder Ihr Administrator Sie einer Gruppe zu, die das Recht "Zugriff auf den Entwicklerbereich." besitzt:
     1. Zugang → Gruppen
     2. Eine neue Gruppe erzeugen oder eine bestehende anklicken
     3. Auf der Detailseite der Gruppe den Tab Berechtigungen wählen

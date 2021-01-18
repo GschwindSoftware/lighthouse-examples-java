@@ -9,6 +9,6 @@ config:
       clientSecret: ...
       # Der Client muss diese Scopes unterstützen. Siehe Tab "Berechtigungen" in der
       # Detailansicht eines Clients im Entwicklerportal
-      scope: financial estate
+      scope: financial
       # https://auth.financial-lighthouse.de/.well-known/openid-configuration
       accessTokenUri: https://auth.financial-lighthouse.de/connect/token

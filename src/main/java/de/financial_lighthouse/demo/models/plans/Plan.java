@@ -18,10 +18,8 @@ public class Plan extends HasId<Integer> {
 
     @JsonProperty("type")
     private PlanType type = PlanType.FinancialEstate;
-    @JsonProperty("clientGuid")
-    private UUID clientContact;
     @JsonProperty("clientId")
-    private int clientId;
+    private UUID clientId;
     @JsonProperty("clientName")
     private String clientName;
     @JsonProperty("creationDate")
@@ -54,25 +52,8 @@ public class Plan extends HasId<Integer> {
 
     /**
      * Der eindeutige Schlüssel des Kunden, zu dem der Plan gehört.
-     * @deprecated Wird in Zukunft mit {@link getClientId} zusammengelegt
      */
-    public @Nullable UUID getClientContact() {
-        return clientContact;
-    }
-
-    /**
-     * Der eindeutige Schlüssel des Kunden in der Kundenverwalung.
-     * @deprecated Wird in Zukunft mit {@link getClientId} zusammengelegt
-     */
-    public Plan setClientContact(@Nullable UUID clientContact) {
-        this.clientContact = clientContact;
-        return this;
-    }
-
-    /**
-     * Der eindeutige Schlüssel des Kunden, zu dem der Plan gehört.
-     */
-    public int getClientId() {
+    public UUID getClientId() {
         return clientId;
     }
 
